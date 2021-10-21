@@ -17,39 +17,8 @@
 #' @aliases plotPAMcorr
 #' @examples
 #' # load data
-#'
-#' ### Coherece Function
 
-# load testing data
-## load libs
-require(rgdal)
-require(spatstat)
-require(mapview)
-## set envi
-wd <- "C:/Envimaster/DSA_plygrnd/"
-dat <- file.path(wd,"Data/")
-exp <- file.path(wd,"walktrough/exp_data/")
-# load example data (computed by classifie_hunde.R)
-wgs <- readOGR(file.path(exp,"hunde_wgs.shp"))
-utm <- readOGR(file.path(exp,"hunde_utm.shp"))
-csv <- read.csv(file.path(exp,"hunde.csv"),row.names = 1)
-head(wgs)
-head(csv)
-mapview(hunde,zcol="type")
-
-# set variables for function
-
-csv$long[1]
-wgs$long[1]
-
-utm$long[1]
-
-hunde <- wgs
-x=hunde
-y=hunde$type
-nk=5
-
-coh_re <- function(x, y,nk,reverse) {
+coh_re <- function(x, y,long=NULL,lat=NULL,nk,reverse) {
 
   # check input
   if(nk>9){
@@ -59,17 +28,17 @@ coh_re <- function(x, y,nk,reverse) {
 
 
   # create window based on max extend of points in dataset
-  box_vec <- owin(xrange = c(min(x$long),
-                             max(x$long)),
-                  yrange = c(min(x$lat),
-                             max(x$lat)))
+  box_vec <- owin(xrange = c(min(x[[long]]),
+                             max(x[[long]])),
+                  yrange = c(min(x[[lat]]),
+                             max(x[[lat]])))
   # plot result
   plot(box_vec)
 
   # point pattern
   # ! waring dublicated points comes from problem in dataframe
-  vec_ppp <- ppp(x$long,
-                 x$lat,
+  vec_ppp <- ppp(x[[long]],
+                 x[[lat]],
                  box_vec)
 
   # get neighbors
@@ -192,11 +161,4 @@ coh_re <- function(x, y,nk,reverse) {
 
 }
 
-# test
-hunde <- csv
-x=hunde
-y=hunde$type
-nk=5
 
-test1 <- coh_re(x,y,5,reverse = F)
-test2 <- coh_re(x,y,5,reverse = F)
