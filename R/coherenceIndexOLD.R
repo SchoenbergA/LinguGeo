@@ -1,4 +1,4 @@
-#' plotPAMcorr - Function for plotting of PAM correction.
+#' coh_re - Function for plotting of PAM correction.
 #' @description visualizes the correction of PAM values by correction value.
 #' @param df data.frame - with column "CTR" for control values, "PAM" for pam values
 #' and optional "PAM_corr" for corrected PAM values.
@@ -13,10 +13,11 @@
 #' @note For visualization purposes the difference between the corrected PAM and Control is used as absolute values (negative values are plotted as positive).
 #' Further the mean and sd is calculated for the absolute values.
 #' @author Andreas Schönberg
-#' @export plotPAMcorr
-#' @aliases plotPAMcorr
+#' @export coh_re
+#' @aliases coh_re
 #' @examples
 #' # load data
+#'
 
 coh_re <- function(x, y,long=NULL,lat=NULL,nk,reverse) {
 
