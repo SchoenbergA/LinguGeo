@@ -1,3 +1,7 @@
+# LinguGeo 0.0.0.9001
+
+* add CoherenceIndex function along old original version to test fpr errors
+
 # LinguGeo 0.0.0.9000
 Initial version
 
