@@ -2,3 +2,4 @@
 
 export(coh_re)
 export(coherenceIndex)
+export(phenmn_class)
