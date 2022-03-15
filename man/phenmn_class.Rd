@@ -4,7 +4,15 @@
 \alias{phenmn_class}
 \title{phenmn_class}
 \usage{
-phenmn_class(data, colname, pat_exp, cl_to)
+phenmn_class(
+  data,
+  colname,
+  pat_exp,
+  cl_to,
+  user_class = F,
+  trim = F,
+  develop = T
+)
 }
 \arguments{
 \item{data}{data.frame or SpatialPointData.frame.}
@@ -14,6 +22,12 @@ phenmn_class(data, colname, pat_exp, cl_to)
 \item{pat_exp}{character - expressions which will be used for pattern matching}
 
 \item{cl_to}{character - classnames. Must be of same lenght as 'pat_exp'}
+
+\item{user_class}{boolean - if True the user can choose to classifie lines with multiple matches by hand.}
+
+\item{trim}{boolean - if TRUE will trim rows which have none applied class (0).}
+
+\item{develop}{boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.}
 }
 \value{
 returns the dataframe with an additional column containing the classes.
@@ -30,6 +44,17 @@ head(csv)
 new_class <- phenmn_class(data=csv,colname = "hunde",
                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
                           ,cl_to = c("nd"   ,"ng"    ,"nn"))
+# using user classification for multiple matches (user_class=TRUE)
+
+new_class <- phenmn_class(data=csv,colname = "hunde",
+                          pat_exp = c("nd|nt","ng|n.g","nn|n$")
+                          ,cl_to = c("nd"   ,"ng"    ,"nn"),
+                          user_class=TRUE)
+# trim all rows with no class (0)
+ new_class <- phenmn_class(data=csv,colname = "hunde",
+                         pat_exp = c("nd|nt","ng|n.g","nn|n$")
+                         ,cl_to = c("nd"   ,"ng"    ,"nn"),
+                         user_class=TRUE,trim=T)
 }
 \author{
 Andreas Schönberg

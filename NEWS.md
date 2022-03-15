@@ -1,3 +1,10 @@
+# LinguGeo 0.0.0.9004
+Develop version
+
+* add user input for multiple matches for 'phenmn_class'
+* add trimmimng and deleting of unneeded columns for 'phenmn_class'
+* update example
+
 # LinguGeo 0.0.0.9003
 Develop version
 
