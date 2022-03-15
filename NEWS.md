@@ -1,3 +1,10 @@
+# LinguGeo 0.0.0.9003
+Develop version
+
+* add correction due to amount of variations for local COH (fun CoherenceIndex)
+* add checkup for 'phenmn_class' to only use data.frame
+* update example
+
 # LinguGeo 0.0.0.9002
 Develop version
 
