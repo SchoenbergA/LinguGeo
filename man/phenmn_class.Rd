@@ -22,16 +22,14 @@ returns the dataframe with an additional column containing the classes.
 Phenomenon Classification. Semi-automatic classification of strings by expressions.
 }
 \examples{
-# load librarys
-require(rgdal)
 # load data
-utm <- readOGR(system.file("extdata","hunde_utm.shp",package = "LinguGeo"))
+csv <- read.csv(system.file("extdata","hunde.csv",package = "LinguGeo"))
 # take a look
-head(utm)
+head(csv)
 # reclassifie
-new_class <- phenmn_class(data=hunde,colname = "hunde",
-                                       pat_exp = c("nd|nt","ng|n.g","nn|n$")
-                                        ,cl_to = c("nd"   ,"ng"    ,"nn"))
+new_class <- phenmn_class(data=csv,colname = "hunde",
+                          pat_exp = c("nd|nt","ng|n.g","nn|n$")
+                          ,cl_to = c("nd"   ,"ng"    ,"nn"))
 }
 \author{
 Andreas Schönberg

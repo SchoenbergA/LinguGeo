@@ -11,16 +11,15 @@
 #' @export phenmn_class
 #' @aliases phenmn_class
 #' @examples
-#' # load librarys
-#' require(rgdal)
 #' # load data
-#' utm <- readOGR(system.file("extdata","hunde_utm.shp",package = "LinguGeo"))
+#' csv <- read.csv(system.file("extdata","hunde.csv",package = "LinguGeo"))
 #' # take a look
-#' head(utm)
+#' head(csv)
 #' # reclassifie
-#' new_class <- phenmn_class(data=hunde,colname = "hunde",
-#'                                        pat_exp = c("nd|nt","ng|n.g","nn|n$")
-#'                                         ,cl_to = c("nd"   ,"ng"    ,"nn"))
+#' new_class <- phenmn_class(data=csv,colname = "hunde",
+#'                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
+#'                           ,cl_to = c("nd"   ,"ng"    ,"nn"))
+
 
 phenmn_class <- function(data,colname,pat_exp,cl_to){
 
@@ -29,6 +28,10 @@ phenmn_class <- function(data,colname,pat_exp,cl_to){
   # pattern and desired classes
   if(length(pat_exp)!=length(cl_to)){
     stop("Defined pattern and desired classes must be of same length!")
+  }
+  #data <- as.data.frame(data)
+  if(class(data)!="data.frame"){
+    stop("Input must be of type 'data.frame'")
   }
   # save ncol for original data
   ncol_data <- ncol(data)
@@ -64,9 +67,11 @@ phenmn_class <- function(data,colname,pat_exp,cl_to){
     } else {
 
       # normal case: exact 1 is !=0
-      data[j,pos_class] <- data[j,which(data[j,pos_min:pos_max]!=0)+4]
+      data[j,pos_class] <- data[j,which(data[j,pos_min:pos_max]!=0)+ncol_data]
     }
   }# end loop
+
+
   # print results
   print(table(data$class))
 

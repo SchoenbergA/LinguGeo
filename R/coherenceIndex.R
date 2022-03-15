@@ -22,13 +22,6 @@
 #' # calculate Coherence Index for "hunde" with "type"
 #' CohInd <- coherenceIndex(utm,utm$type,6,7,nk=5,reverse = F)
 
-dat=utm
-cl=utm$type
-xcord=6
-  ycord=7
-  nk=5
-
-
 coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F,out_spatial=F) {
 
   # check input
@@ -76,7 +69,7 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
       names(neigh_df2)[names(neigh_df2) == 'cl[neigh[[i]]]'] <- paste0("NN",i)
 
       # loop control
-      print(i)
+      #print(i)
       head(neigh_df2)
     }
 
@@ -103,12 +96,6 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
   }
 
 
-
-  ###
-
-
-  #######
-  k=2
 
   if(reverse==F){
     # inverse cbind
@@ -173,21 +160,20 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
 
   # corrected global coherence index - glob in realtion to n class in type
   glob_corr <- (glob - 1/length(table(cl))) / (1 - 1/length(table(cl)))
-
-  cat(paste0("global coh: ",round(glob_corr,2)," @ ",as.numeric(length(table(cl))))," variants",sep = "/n")
+  nvar <- length(table(cl))
+  cat(paste0("Global coh uncorrected: ",round(glob,4)," @ ",nvar," variants"),sep = "\n")
+  cat(paste0("Global coh: ",round(glob_corr,4)," @ ",nvar," variants"),sep = "\n")
 
   # return #####################################################################
 
   if(out_spatial==T){
     neigh_df5 <- neigh_df4[,c(1,2,ncol(neigh_df4))]
     sPoint <- SpatialPointsDataFrame(coords = neigh_df5[,1:2],neigh_df5[3])
-    print(glob)
-    print(glob_corr)
+
     return(list("df"=neigh_df4,"sP"=sPoint))
   }
 
-  print(glob)
-  print(glob_corr)
+
   return(neigh_df4)
 
 }

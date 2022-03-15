@@ -4,7 +4,16 @@
 \alias{coherenceIndex}
 \title{coherenceIndex}
 \usage{
-coherenceIndex(dat, cl, xcord = NULL, ycord = NULL, nk = NULL, reverse)
+coherenceIndex(
+  dat,
+  cl,
+  xcord = NULL,
+  ycord = NULL,
+  nk = NULL,
+  reverse,
+  develop = F,
+  out_spatial = F
+)
 }
 \arguments{
 \item{dat}{data.frame or SpatialPointData.frame.}
