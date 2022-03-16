@@ -22,7 +22,7 @@
 #' # calculate Coherence Index for "hunde" with "type"
 #' CohInd <- coherenceIndex(utm,utm$type,6,7,nk=5,reverse = F)
 
-coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F,out_spatial=F) {
+coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F,out_spatial=F,Proj=NULL) {
 
   # check input
   if(nk>19){
@@ -169,6 +169,10 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
   if(out_spatial==T){
     neigh_df5 <- neigh_df4[,c(1,2,ncol(neigh_df4))]
     sPoint <- SpatialPointsDataFrame(coords = neigh_df5[,1:2],neigh_df5[3])
+    if(is.null(Proj)==F){
+      # set projection argument
+      proj4string(sPoint) <- Proj
+    }
 
     return(list("df"=neigh_df4,"sP"=sPoint))
   }

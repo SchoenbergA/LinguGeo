@@ -12,7 +12,8 @@ coherenceIndex(
   nk = NULL,
   reverse,
   develop = F,
-  out_spatial = F
+  out_spatial = F,
+  Proj = NULL
 )
 }
 \arguments{

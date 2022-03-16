@@ -136,9 +136,11 @@ phenmn_class <- function(data,colname,pat_exp,cl_to,user_class=F,trim=F,develop=
   }
   # trim output
   if(trim ==T){
-
+    cat(paste0("Recycling ",length(which(data$class=="1_double")), " entries with class = '1_double' to class '0'"),sep="\n")
+    data$class[data$class=="1_double"] <- 0
     cat(paste0("Trimming ",nrow(data)-nrow(subset(data,data$class!=0)), " entries with class = '0'"),sep="\n")
     data <- subset(data,data$class!=0)
+    print(table(data$class))
     }
 
   # return

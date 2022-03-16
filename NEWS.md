@@ -1,3 +1,9 @@
+# LinguGeo 0.0.0.9005
+Develop version
+
+* add advanced trimming for 'phenmn_class'. Now will recycle multiply entires eveen if not classified by hand (in older version the output could contain "1_double" class if multilpy entries were not cleaned by hand)
+* add CRS argument for 'CoherenceIndex'. Now if given will set the projection for the output              SpatrialPointsDataFrame.
+
 # LinguGeo 0.0.0.9004
 Develop version
 
