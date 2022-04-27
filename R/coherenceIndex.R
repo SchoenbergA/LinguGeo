@@ -174,7 +174,7 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
       proj4string(sPoint) <- Proj
     }
 
-    return(list("df"=neigh_df4,"sP"=sPoint))
+    return(list("df"=neigh_df4,"sP"=sPoint,"glob_corr"=glob_corr))
   }
 
 
