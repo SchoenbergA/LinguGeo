@@ -1,3 +1,8 @@
+# LinguGeo 0.0.0.9006
+Develop version
+
+* add output of global corrected value
+
 # LinguGeo 0.0.0.9005
 Develop version
 
