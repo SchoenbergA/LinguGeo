@@ -7,9 +7,4 @@
 #' @author Andreas Schönberg
 #' @keywords package
 NULL
-#' @docType data
-#' @name hunde.csv - data
-#' @title Example csv Dataset
-#' @description A csv with long, lat and the spelling of "hunde" as well as classified spelling by phenomen.
-#' @format \code{"utils::read.csv"}
-NULL
+
