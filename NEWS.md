@@ -1,3 +1,17 @@
+# LinguGeo 0.0.0.9007
+Develop version / structural change
+
+* remove dependencies to rgdal (was former used for creating spatial objects and loading shp example data) 
+* remove usgae and support of shapefile format in th package
+* rework examples and new example data (all based on dataframes stored in csv)
+
+* update 'coherenceIndex'
+  - remove coh correction formula
+  - remove develop mode argument (not need due to no more corrections)
+  - remove output as spatial points (former was used for plotting with mapview)
+  
+* add new function 'plot_coh' a specialized wrapper for ggplot2 to easy plot coh
+
 # LinguGeo 0.0.0.9006
 Develop version
 

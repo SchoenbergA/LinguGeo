@@ -1,28 +1,29 @@
 #' coherenceIndex
-#' @description Calculates the Coherence Index by using nearest Neighbors.
-#' @param dat  data.frame or SpatialPointData.frame.
+#' @description Calculates the Coherence Index by using an nearest neighbors approach.
+#' @param dat  data.frame.
 #' @param cl  charater - name of column containing the classes
 #' @param xcord numeric - column with x-coordinates
 #' @param ycord numeric - column with y-coordinates
 #' @param nk numeric - amount of nearest neighbors to use. Maximum is 19.
 #' @param reverse boolean - develop. If TRUE saves to df in order, else in reverse.
-#' @return returns
+#' @return return
 #' @note For
 #' @author Andreas Schönberg
 #' @export coherenceIndex
 #' @aliases coherenceIndex
 #' @examples
 #' # load librarys
-#' require(rgdal)
 #' require(spatstat)
 #' # load data
-#' utm <- readOGR(system.file("extdata","hunde_utm.shp",package = "LinguGeo"))
+#' csv <- read.csv(system.file("extdata","class_hunde_utm.csv",package = "LinguGeo"))
 #' # take a look
-#' head(utm)
+#' head(csv)
 #' # calculate Coherence Index for "hunde" with "type"
-#' CohInd <- coherenceIndex(utm,utm$type,6,7,nk=5,reverse = F)
+#' CohInd <- coherenceIndex(csv,csv$class,2,3,nk=5,reverse = F)
+#' head(CohInd)
 
-coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F,out_spatial=F,Proj=NULL) {
+
+coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F) {
 
   # check input
   if(nk>19){
@@ -142,17 +143,10 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
     }
   }
 
-  # product
-  head(neigh_df4)
+  # product output neigh_df4
 
-  if(develop==T){
-    # normalize
-    ### !!! doenst not work with grep. grep causes class to dataframe
-    neigh_df4$nrm <- neigh_df4[,ncol(neigh_df4)]/nk
-    # correct values to n variants
-    neigh_df4$cor <- (neigh_df4$nrm - 1/length(table(cl))) / (1 - 1/length(table(cl)))
-
-  }
+  # normalize
+  neigh_df4$nrm <- neigh_df4[,ncol(neigh_df4)]/nk
 
   # global coherence index - sum of nSum / max (obersavtions*nk)
   glob <-sum(neigh_df4[grep(paste0("nSum",nk),colnames(neigh_df4))]) /
@@ -165,19 +159,6 @@ coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop
   cat(paste0("Global coh: ",round(glob_corr,4)," @ ",nvar," variants"),sep = "\n")
 
   # return #####################################################################
-
-  if(out_spatial==T){
-    neigh_df5 <- neigh_df4[,c(1,2,ncol(neigh_df4))]
-    sPoint <- SpatialPointsDataFrame(coords = neigh_df5[,1:2],neigh_df5[3])
-    if(is.null(Proj)==F){
-      # set projection argument
-      proj4string(sPoint) <- Proj
-    }
-
-    return(list("df"=neigh_df4,"sP"=sPoint,"glob_corr"=glob_corr))
-  }
-
-
   return(neigh_df4)
 
 }

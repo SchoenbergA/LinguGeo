@@ -11,13 +11,11 @@ coherenceIndex(
   ycord = NULL,
   nk = NULL,
   reverse,
-  develop = F,
-  out_spatial = F,
-  Proj = NULL
+  develop = F
 )
 }
 \arguments{
-\item{dat}{data.frame or SpatialPointData.frame.}
+\item{dat}{data.frame.}
 
 \item{cl}{charater - name of column containing the classes}
 
@@ -30,24 +28,24 @@ coherenceIndex(
 \item{reverse}{boolean - develop. If TRUE saves to df in order, else in reverse.}
 }
 \value{
-returns
+return
 }
 \description{
-Calculates the Coherence Index by using nearest Neighbors.
+Calculates the Coherence Index by using an nearest neighbors approach.
 }
 \note{
 For
 }
 \examples{
 # load librarys
-require(rgdal)
 require(spatstat)
 # load data
-utm <- readOGR(system.file("extdata","hunde_utm.shp",package = "LinguGeo"))
+csv <- read.csv(system.file("extdata","class_hunde_utm.csv",package = "LinguGeo"))
 # take a look
-head(utm)
+head(csv)
 # calculate Coherence Index for "hunde" with "type"
-CohInd <- coherenceIndex(utm,utm$type,6,7,nk=5,reverse = F)
+CohInd <- coherenceIndex(csv,csv$class,2,3,nk=5,reverse = F)
+head(CohInd)
 }
 \author{
 Andreas Schönberg

@@ -37,19 +37,20 @@ Phenomenon Classification. Semi-automatic classification of strings by expressio
 }
 \examples{
 # load data
-csv <- read.csv(system.file("extdata","hunde.csv",package = "LinguGeo"))
+csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
 # take a look
 head(csv)
 # reclassifie
 new_class <- phenmn_class(data=csv,colname = "hunde",
                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
                           ,cl_to = c("nd"   ,"ng"    ,"nn"))
-# using user classification for multiple matches (user_class=TRUE)
 
+# using user classification for multiple matches (user_class=TRUE)
 new_class <- phenmn_class(data=csv,colname = "hunde",
                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
                           ,cl_to = c("nd"   ,"ng"    ,"nn"),
                           user_class=TRUE)
+
 # trim all rows with no class (0)
  new_class <- phenmn_class(data=csv,colname = "hunde",
                          pat_exp = c("nd|nt","ng|n.g","nn|n$")
