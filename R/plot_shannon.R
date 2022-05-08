@@ -25,7 +25,7 @@
 
 plot_shannon <- function(df,add_data=F){
 # check input
-if(any(colnames(df=="shn"))==F){
+if(any(colnames(df=="shn")==F)){
   stop("shannon entropy values are missing!")
 }
 
