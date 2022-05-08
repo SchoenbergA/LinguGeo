@@ -31,7 +31,7 @@ if(any(colnames(df=="shn")==F)){
 
 # fork to display shannon only or data and shannon as alpha
 if(add_data==F){
-  ggplot(coh, aes(xcord, ycord,
+  ggplot(df, aes(xcord, ycord,
                   col = shn)) +
     geom_point(size = 3) +
     labs(x="", y="") +
@@ -39,7 +39,7 @@ if(add_data==F){
     theme(legend.position = "none") +
     scale_color_gradient(low = "black", high = "yellow")
 } else {
-  ggplot(coh, aes(xcord, ycord,
+  ggplot(df, aes(xcord, ycord,
                   col = data,
                   alpha = shn)) +
     geom_point(size = 3) +
