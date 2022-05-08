@@ -1,3 +1,9 @@
+# LinguGeo 0.0.0.9008
+Develop version
+
+* update 'plot_coh'.
+* update examples: add 'require()' LinguGeo and dependecies.
+
 # LinguGeo 0.0.0.9007
 Develop version / structural change
 

@@ -14,6 +14,8 @@
 #' @export phenmn_class
 #' @aliases phenmn_class
 #' @examples
+#' # load librarys
+#' require(LinguGeo)
 #' # load data
 #' csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
 #' # take a look

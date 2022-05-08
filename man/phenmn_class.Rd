@@ -36,6 +36,8 @@ returns the dataframe with an additional column containing the classes.
 Phenomenon Classification. Semi-automatic classification of strings by expressions.
 }
 \examples{
+# load librarys
+require(LinguGeo)
 # load data
 csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
 # take a look
