@@ -66,7 +66,7 @@ plot_coh <- function(df,degree = 1, inverse = F,est_dens=F, coh_th=NULL,bins=10)
       }
 
     # plot coh + KDE density
-    return(plt + geom_density_2d(data = filter(df, nrm < coh_th),
+    return(plt + geom_density_2d(data = dplyr::filter(df, nrm < coh_th),
                                   #h = 0.08,
                                   alpha = 1,
                                   bins = bins,
