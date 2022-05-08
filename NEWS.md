@@ -1,3 +1,10 @@
+# LinguGeo 0.0.0.9009
+Develop version
+
+*add new function 'calc_shannon'. Calculates the shannon entropy (with binary log base=2). Returns the input dataframe with an additional column with the shannon entropy values.
+
+* add ne function 'plot_shannon'. Specialized wrapper for ggplot2 to display the shannon entropy.
+
 # LinguGeo 0.0.0.9008
 Develop version
 
