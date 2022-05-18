@@ -1,6 +1,6 @@
 Package: LinguGeo
 Title: Package for Linguistic Geography
-Version: 0.0.0.9009
+Version: 0.0.0.9010
 Authors@R: 
     person(given = "Andreas",
            family = "Schönberg",

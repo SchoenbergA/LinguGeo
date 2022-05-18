@@ -4,15 +4,7 @@
 \alias{coherenceIndex}
 \title{coherenceIndex}
 \usage{
-coherenceIndex(
-  dat,
-  cl,
-  xcord = NULL,
-  ycord = NULL,
-  nk = NULL,
-  reverse,
-  develop = F
-)
+coherenceIndex(dat, cl, xcord = NULL, ycord = NULL, nk = NULL, reverse = F)
 }
 \arguments{
 \item{dat}{data.frame.}

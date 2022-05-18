@@ -1,3 +1,12 @@
+# LinguGeo 0.0.0.9010
+Develop version
+*Major Update*
+
+* add new development versions of 'phenmn_class2' and 'coherence Index2'
+  - add feature to use local variation in coherence index
+  - remove "user classification" for multiple entires
+  - rework example
+  
 # LinguGeo 0.0.0.9009
 Develop version
 

@@ -24,7 +24,7 @@
 #' head(CohInd)
 
 
-coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse,develop=F) {
+coherenceIndex <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,reverse=F) {
 
   # check input
   if(nk>19){
