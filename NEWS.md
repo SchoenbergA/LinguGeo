@@ -1,3 +1,11 @@
+# LinguGeo 0.0.0.9011
+Develop version
+*Development Update*
+
+* add new function "mergeMultiPlaces2" which merges multple entiries from equal places. Works atm only for classified data (class and data will be merged) and is hardcoded
+* fix a mjor bug in "coherenceIndex2" where a variable was set to empty due to "<-vector()"
+* fixed workflow for local variation by adding a ", " collapse instead of "," for phenomclass2
+
 # LinguGeo 0.0.0.9010
 Develop version
 *Major Update*

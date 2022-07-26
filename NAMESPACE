@@ -3,6 +3,7 @@
 export(calc_shannon)
 export(coherenceIndex)
 export(coherenceIndex2)
+export(mergeMultiPlaces2)
 export(phenmn_class)
 export(phenmn_class2)
 export(plot_coh)

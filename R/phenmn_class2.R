@@ -88,7 +88,7 @@ phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T){
 
     } else {
       # paste all items != 0
-      data[j,pos_class] <-paste0(data[j,pos_min:pos_max][which(data[j,pos_min:pos_max]!=0)],collapse = ",")
+      data[j,pos_class] <-paste0(data[j,pos_min:pos_max][which(data[j,pos_min:pos_max]!=0)],collapse = ", ")
     }
 
   }# end loop
@@ -100,8 +100,8 @@ phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T){
 
   for(k in 1:nrow(data)){
     local_variation[k]<-length(which(data[k,pos_min:pos_max]!=0))
-    n_items[k] <- length(unlist(str_split(data[k,cn],",")))
-    length(unlist(str_split(data[k,cn],",")))
+    n_items[k] <- length(unlist(str_split(data[k,cn],", ")))
+    length(unlist(str_split(data[k,cn],", ")))
   }
 
   data <- cbind(data, local_variation,n_items)

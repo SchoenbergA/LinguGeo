@@ -133,7 +133,6 @@ coherenceIndex2 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL) {
 
   } # end loop over nk for 1 item
 
-  df_i2 <- vector()
   # NN check loop for df_i2 (2 item in data)
   if(length(df_i2)!=0){
     for(nn in 1:nk){
