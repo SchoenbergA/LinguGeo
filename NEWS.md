@@ -1,7 +1,6 @@
 # LinguGeo 0.0.0.9012
-Update and Bugfixes
+Update
 
-* coherenceIndex2 now can be uesed with dataset which has no local variation. (Function check if there is local variation)
 * new function "mergeMultiplaces3". Improvement of mergeMultiplaces2 uses a combination of x and y coordinates to detect duplicates.
 
 # LinguGeo 0.0.0.9011
