@@ -4,7 +4,7 @@
 \alias{plot_coh}
 \title{plot_coh}
 \usage{
-plot_coh(df, degree = 1, inverse = F, est_dens = F, coh_th = NULL, bins = 10)
+plot_coh(df, degree = 1, inverse = T, est_dens = F, coh_th = NULL, bins = 10)
 }
 \arguments{
 \item{df}{data.frame in the format provided by 'coherence_index' (see deteails).}

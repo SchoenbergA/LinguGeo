@@ -29,30 +29,28 @@
 #' # plot with KDE
 #' plot_coh(coh,est_dens=T,coh_th=0.8)
 
-
-
-plot_coh <- function(df,degree = 1, inverse = F,est_dens=F, coh_th=NULL,bins=10) {
+plot_coh <- function(df,degree = 1, inverse = T,est_dens=F, coh_th=NULL,bins=10) {
 
   # switch for inverse
   if(inverse == T) {
     # require plot for language items class in color and inverse coh as alpha
     plt <- ggplot(df, aes(xcord, ycord,
                               col = data,
-                              alpha = 1-nrm)) +
+                              alpha = 1-coh)) +
       geom_point(size = 3) +
       labs(x="", y="") +
       theme(legend.position = "none") +
-      scale_color_brewer(palette = "Set1")
+      scale_color_viridis(discrete = T)
   } else {
     # plot natural coherence index as adjustible intensity by alpha
     plt <- ggplot(df, aes(xcord, ycord,
                               col = data,
-                              alpha = ifelse(nrm < degree, nrm, 1))) +
+                              alpha = ifelse(coh < degree, coh, 1))) +
       geom_point(size = 3) +
       labs(x="", y="") +
 
       theme(legend.position = "none") +
-      scale_color_brewer(palette = "Set1")
+      scale_color_viridis(discrete = T)
   }
 
   # optional KDE density display
@@ -66,7 +64,7 @@ plot_coh <- function(df,degree = 1, inverse = F,est_dens=F, coh_th=NULL,bins=10)
       }
 
     # plot coh + KDE density
-    return(plt + geom_density_2d(data = dplyr::filter(df, nrm < coh_th),
+    return(plt + geom_density_2d(data = dplyr::filter(df, coh < coh_th),
                                   #h = 0.08,
                                   alpha = 1,
                                   bins = bins,

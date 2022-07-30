@@ -4,7 +4,7 @@
 \alias{coherenceIndex2}
 \title{coherenceIndex2}
 \usage{
-coherenceIndex2(dat, cl, xcord = NULL, ycord = NULL, nk = NULL)
+coherenceIndex2(dat, cl, xcord = NULL, ycord = NULL, nk = NULL, develop = T)
 }
 \arguments{
 \item{dat}{data.frame.}

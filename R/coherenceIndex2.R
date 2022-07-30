@@ -34,7 +34,7 @@
 #' coh <- coherenceIndex(csv,csv$class,2,3,nk=5)
 
 
-coherenceIndex2 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL) {
+coherenceIndex2 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T) {
 
   # check input
   if(nk>19){
@@ -203,7 +203,7 @@ coherenceIndex2 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL) {
 
 
   # normalize
-  neigh_df4$nrm <- neigh_df4[,ncol(neigh_df4)]/nk
+  neigh_df4$coh <- neigh_df4[,ncol(neigh_df4)]/nk
 
   # global coherence index - sum of nSum / max (obersavtions*nk)
   glob <-sum(neigh_df4[grep(paste0("nSum",nk),colnames(neigh_df4))]) /
@@ -221,6 +221,11 @@ coherenceIndex2 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL) {
 
   cat(paste0("Global coh uncorrected: ",round(glob,4)," @ ",uvar," variants"),sep = "\n")
   cat(paste0("Global coh: ",round(glob_corr,4)," @ ",uvar," variants"),sep = "\n")
+
+  if(develop==F){
+    # clean up
+    neigh_df4 <- neigh_df4[,c(1,2,3,4+nk,5+3*nk)]
+  }
 
   # return #####################################################################
   return(neigh_df4)

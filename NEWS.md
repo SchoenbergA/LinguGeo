@@ -1,3 +1,11 @@
+# LinguGeo 0.0.0.9013
+Development version
+
+* add "development" mode for "coherenceindex2". If FALSE deletes all unneded columns leading to a better overview.
+* changed output columnname for coherence value from 'nrm' to 'coh'
+
+* update "plot_coh" now using viridis color palette.
+
 # LinguGeo 0.0.0.9012
 Update
 
@@ -8,7 +16,7 @@ Develop version
 *Development Update*
 
 * add new function "mergeMultiPlaces2" which merges multple entiries from equal places. Works atm only for classified data (class and data will be merged) and is hardcoded
-* fix a mjor bug in "coherenceIndex2" where a variable was set to empty due to "<-vector()"
+* fix a major bug in "coherenceIndex2" where a variable was set to empty due to "<-vector()"
 * fixed workflow for local variation by adding a ", " collapse instead of "," for phenomclass2
 
 # LinguGeo 0.0.0.9010
