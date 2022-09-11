@@ -31,7 +31,6 @@ For
 \examples{
 # load librarys
 require(LinguGeo)
-require(spatstat)
 # load data
 csv <- read.csv(system.file("extdata","class_hunde_utm.csv",package = "LinguGeo"))
 # take a look

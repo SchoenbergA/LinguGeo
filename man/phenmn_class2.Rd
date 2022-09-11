@@ -4,7 +4,7 @@
 \alias{phenmn_class2}
 \title{phenmn_class2}
 \usage{
-phenmn_class2(data, colname, pat_exp, cl_to, trim = F, develop = T)
+phenmn_class2(data, colname, pat_exp, cl_to, trim = F, develop = T, set_NA = F)
 }
 \arguments{
 \item{data}{data.frame or SpatialPointData.frame.}
@@ -18,6 +18,8 @@ phenmn_class2(data, colname, pat_exp, cl_to, trim = F, develop = T)
 \item{trim}{boolean - if TRUE will trim rows which have none applied class (0).}
 
 \item{develop}{boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.}
+
+\item{set_NA}{boolean - if TRUE will convert all class '0' to NA (see notes)}
 }
 \value{
 returns the dataframe with an additional column containing the classes.
@@ -28,6 +30,7 @@ Phenomenon Classification. Semi-automatic classification of strings by expressio
 \note{
 The data may match with multiple patterns which could lead to more than 1 class for a single items.
 If single items contain multiple classes the function will provide a warning.
+All entries which does not match any of the given pattern will be assigned to class "0". If 'set_NA' == T all class 0 entires will be converted to NA.
 
 TEXT describing other cases! coming soon
 }

@@ -1,3 +1,27 @@
+# LinguGeo 0.0.0.9014
+Major Update - Add NA handling to several functions
+Development version
+
+* add new function "mergeMultiPlacesX". Advanced version of mergeMultiPlaces which is able to merge selected columns instead of only predefined "class" column. Useable to merge huge dataframes which have dubilcated coordinates but has no kind of sorting except for "class".
+
+* update 'coherencIndex3' 
+now set a given value to NA and excludes NA values for coh calculation. The NA values are later binded again. BUT: due to the structur of the function an index is not possible to reorder all places to its original input state. Solution could be to sort by unique xy coordinates becasue there should not be any dublicate left (if mergeMultiPlaces is used)
+
+* update "mergePlaces" function (X2): now excludes places with NA values. BUT: if any dubilcated place has an NA it wouold not be deleted leading to different n places compared to the function without using NA exclud. Further this could cause problems for later aggregation and plotting because some places may have coh values as well as NA leading to NA symbol directly over the COH value and or problems when aggregating values for a specific place.
+
+* update 'phenmn_class2
+Add 'set_NA' argument which will convert all class 0 entires to NA. Now the return of 'set_NA' can be used in multiplacesNA
+
+* new function 'multiplacesNA'
+add NA handling to MergeMultiPlaces function. Now the returning classes (and mixed classes) does not include NAs. NA only occure if all entires are NA. The retunr can be used in coherencIndex3
+
+* new function 'plot_coh2'
+add NA plotting and remove "invert" and "degree" argumnets.
+
+* new function 'aggregate_coh'
+
+* new function 'plot_agt'
+
 # LinguGeo 0.0.0.9013
 Development version
 

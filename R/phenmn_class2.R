@@ -6,10 +6,12 @@
 #' @param cl_to character - classnames. Must be of same lenght as 'pat_exp'
 #' @param trim boolean - if TRUE will trim rows which have none applied class (0).
 #' @param develop boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.
+#' @param set_NA boolean - if TRUE will convert all class '0' to NA (see notes)
 
 #' @return returns the dataframe with an additional column containing the classes.
 #' @note The data may match with multiple patterns which could lead to more than 1 class for a single items.
 #' If single items contain multiple classes the function will provide a warning.
+#' All entries which does not match any of the given pattern will be assigned to class "0". If 'set_NA' == T all class 0 entires will be converted to NA.
 #'
 #' TEXT describing other cases! coming soon
 
@@ -47,7 +49,7 @@
 #' test <- phenmn_class2(data=testdata,colname = "hunde",pat_exp = c("nd|nt","ng|n.g","nn|n$"),
 #'                       cl_to = c("nd"   ,"ng"    ,"nn"))
 
-phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T){
+phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T,set_NA=F){
 
   # check input
 
@@ -126,6 +128,10 @@ phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T){
   }
 
 
+  if(set_NA==T){
+    cat("Setting class '0' to NA",sep="\n")
+    data$class[which(data$class==0)] <- NA
+  }
   # return
   return(data)
 
