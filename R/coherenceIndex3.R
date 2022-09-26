@@ -5,6 +5,8 @@
 #' @param xcord numeric - column with x-coordinates
 #' @param ycord numeric - column with y-coordinates
 #' @param nk numeric - amount of nearest neighbors to use. Maximum is 19.
+#' @param develop boolean - If TRUE will return the full dataframe with all steps. Default=FALSE
+#' @param na_value NA, NULL, numeric or character - the value which indicates NA in the 'class' column of the dataframe.(see details).
 #' @return returns the coherence index for each data point including local variation.
 #' @note no notes
 #' @author Andreas Schönberg
@@ -12,39 +14,32 @@
 #' @aliases coherenceIndex3
 #' @examples
 #' # load librarys
-#' require(LinguGeo)
-#' require(spatstat)
-#' require(stringr)
-#'
-#' # load data
-#' csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
-#' # take a look
-#' head(csv)
-#'
-#' # reclassify and trim all rows with no class (0)
-#' csv <- phenmn_class2(data=csv,colname = "hunde",
-#'                      pat_exp = c("nd|nt","ng|n.g","nn|n$")
-#'                      ,cl_to = c("nd"   ,"ng"    ,"nn")
-#'                      ,trim=T)
-#'
-#' # calculate Coherence Index for "hunde" with "type"
-#' coh2 <- coherenceIndex2(csv,csv$class,2,3,nk=5)
-#'
-#' # compare to older version without local variation
-#' coh <- coherenceIndex(csv,csv$class,2,3,nk=5)
+
 
 coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=NA) {
 
+  # check for correct coordinates
+  if(xcord>ycord){
+    stop("Coordinates are in y x order! x y order is required")
+  }
   # check input
   if(nk>19){
     stop("nk > 19 is not supported ... yet")
   }
   # requires to change variable in pattern from n1$ to exact n1
 
+  # check for wrong NA_value inpout
+  if(is.null(na_value)==T && any(is.na(dat[,which(colnames(dat)==cl)]))==T) {
+    stop("'NA_value' set to 'NULL' but NA detected! Use 'NA_value==NA'")
+  }
+  # check for na_value=0
+  if(na_value==0 && is.null(na_value)==F && is.na(na_value)==F) {
+    warning("class '0' set to NA. Local variation is not affected and could lead to mixed classes containing class '0'.")
+  }
   ### set NA value
   if(is.null(na_value)==F){
   # check if there are NAs if na_value==NA
-  if(is.na(na_value)==T && any(is.na(dat[,4]))==F){
+  if(is.na(na_value)==T && any(is.na(dat[,which(colnames(dat)==cl)]))==F){
     stop("na_value set to NA but no NA detected. Use 'na_value'==NULL if no NA values are in column 'class'") # if NA is given but not in df
   }
   # if na_value is != NA -> set na_value to NA else use NA
@@ -117,12 +112,9 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
 
   # split entries with 1 or more language items
 
-  # add index
-  neigh_df2$index <- 1:nrow(neigh_df2)
   # split rows which have more than 1 langugae item
   df_i1 <-neigh_df2[which(str_count(neigh_df2$data,",")==0),]
   df_i2 <-neigh_df2[which(str_count(neigh_df2$data,",")>0),]
-
 
   # NN check loop for df_i1 (1 item in data)
   for(nn in 1:nk){
@@ -161,7 +153,8 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
   } # end loop over nk for 1 item
 
   # NN check loop for df_i2 (2 item in data)
-  if(length(df_i2)!=0){
+  if(nrow(df_i2)!=0){
+    cat("Local variation detectet!",sep="\n")
     for(nn in 1:nk){
 
     # open new vector
@@ -198,12 +191,13 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
       names(df_i2_2)[names(df_i2_2) == 'newcol'] <- paste0("n",nn)
     }
 
-  } # end loop over nk for 1 item
+  } # end loop over nk for 2 item
 
     # rbind both dataframes
     neigh_df3 <- rbind(df_i1_2,df_i2_2)
        # end if local variation detected in data
        } else {
+         cat("No local variation detectet!",sep="\n")
          neigh_df3 <- df_i1_2
        }
 
@@ -251,17 +245,20 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
 
   if(develop==F){
     # clean up df remove unneeded columns
-    neigh_df4 <- neigh_df4[,c(1,2,3,4+nk,5+3*nk)]
+    neigh_df4 <- neigh_df4[,c(1,2,3,4+3*nk)]
 
+    # if any NA in data -> rbind nonNA and NA data
     if(is.null(na_value)==F){
     # add NA places to df
     # subset columns used in neigh_df4 and set dummy columns with NA
-    na <- dat_na[,c(2,3,8)]
-    na$index <- NA
+    na <- dat_na[,c(xcord,ycord)]
+    na$data <- NA
     na$coh <-NA
-    colnames(na)[1:3] <-c("xcord","ycord","data")# set names
+    colnames(na)[1:2] <-c("xcord","ycord")# set names
     neigh_df4 <- rbind(neigh_df4,na)
     }
+  } else {
+    warning("Output may be shorter than expected due to missing merge of NA values!")
   }
 
 

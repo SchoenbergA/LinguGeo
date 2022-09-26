@@ -1,24 +1,18 @@
 #' calc_shannon
 #' @description Calculates the shannon entropy.
 #' @param df  data.frame.
-#' @param colname_coh character - name of column with tzhe coherence values. Default="nrm" (provided by 'LinguGeo::CoherenceIndex'.
+#' @param colname_coh character - name of column with the coherence values. Default="nrm" (provided by 'LinguGeo::CoherenceIndex'.
 
-#' @return returns the data.frame and adds a columns with shannon entropy values.
+#' @return returns the data.frame and adds a column with shannon entropy values.
 
 #' @author Andreas Schönberg
 #' @export calc_shannon
 #' @aliases calc_shannon
 #' @examples
 #' # load librarys
-#' require(LinguGeo)
-#' # load data
-#' coh <- read.csv(system.file("extdata","coh_utm.csv",package = "LinguGeo"))
-#' # take a look
-#' head(coh)
-#' shannon <- calc_shannon(coh)
-#' shannon$shn
 
-calc_shannon <- function(df,colname_coh="nrm"){
+
+calc_shannon <- function(df,colname_coh="coh"){
 
   # check input
   if(any(colnames(df)==colname_coh)==F){

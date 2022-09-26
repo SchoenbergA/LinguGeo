@@ -4,7 +4,7 @@
 \alias{phenmn_class2}
 \title{phenmn_class2}
 \usage{
-phenmn_class2(data, colname, pat_exp, cl_to, trim = F, develop = T, set_NA = F)
+phenmn_class2(data, colname, pat_exp, cl_to, set_NA = F)
 }
 \arguments{
 \item{data}{data.frame or SpatialPointData.frame.}
@@ -15,11 +15,9 @@ phenmn_class2(data, colname, pat_exp, cl_to, trim = F, develop = T, set_NA = F)
 
 \item{cl_to}{character - classnames. Must be of same lenght as 'pat_exp'}
 
-\item{trim}{boolean - if TRUE will trim rows which have none applied class (0).}
+\item{set_NA}{boolean - if TRUE will convert all class '0' to NA (see notes)}
 
 \item{develop}{boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.}
-
-\item{set_NA}{boolean - if TRUE will convert all class '0' to NA (see notes)}
 }
 \value{
 returns the dataframe with an additional column containing the classes.
@@ -36,34 +34,6 @@ TEXT describing other cases! coming soon
 }
 \examples{
 # load librarys
-require(LinguGeo)
-require(stringr)
-
-# load data
-csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
-# take a look
-head(csv)
-
-# reclassify "hunde" using the old version and trim all rows with no class (0)
-new_class <- phenmn_class(data=csv,colname = "hunde",
-                          pat_exp = c("nd|nt","ng|n.g","nn|n$")
-                          ,cl_to = c("nd"   ,"ng"    ,"nn"))
-
-
-# compare to new version
-new_class <- phenmn_class2(data=csv,colname = "hunde",
-                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
-                           ,cl_to = c("nd"   ,"ng"    ,"nn")
-                           ,trim=T)
-
-# test for n items > 2
-# get test data
-testdata <- csv[1:5,]
-testdata$hunde[1] <- "Hunde, Hunn, Hung"
-testdata$hunde[2] <- "Hude, Hunng, Hunnd, Hunde"
-
-test <- phenmn_class2(data=testdata,colname = "hunde",pat_exp = c("nd|nt","ng|n.g","nn|n$"),
-                      cl_to = c("nd"   ,"ng"    ,"nn"))
 }
 \author{
 Andreas Schönberg

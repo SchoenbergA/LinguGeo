@@ -7,9 +7,9 @@
 plot_shannon(df, add_data = F)
 }
 \arguments{
-\item{df}{data.frame in the format provided by 'LinguGeo::calc_shannon' (see details).}
+\item{df}{data.frame - in the format provided by 'LinguGeo::calc_shannon' (see details).}
 
-\item{asd}{Boolean - If FALSE will plot the shannon entropy, if TRUE will plot the Language Item classes and use alpha based on shannon entropy values. Default=F}
+\item{add_data}{Boolean - If FALSE will plot the shannon entropy, if TRUE will plot the Language Item classes and use alpha based on shannon entropy values. Default=F}
 }
 \value{
 A plot with the shannon entropy or the language item classes in different colors and the shannon entropy as alpha.
@@ -19,18 +19,6 @@ Specialized plot function for the Shannon entropy.
 }
 \examples{
 # load librarys
-require(LinguGeo)
-require(ggplot2)
-# load data
-coh <- read.csv(system.file("extdata","coh_utm.csv",package = "LinguGeo"))
-# take a look
-head(coh)
-# calculate shannon entropy
-df_shn <- calc_shannon(coh)
-# plot shannon entropy
-plot_shannon(df_shn)
-# plot add data
-plot_shannon(df_shn,add_data=T)
 }
 \author{
 Andreas Schönberg

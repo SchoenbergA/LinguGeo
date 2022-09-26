@@ -23,20 +23,6 @@ Specialized plot function for the Coherence index.
 }
 \examples{
 # load librarys
-require(LinguGeo)
-require(dplyr)
-# load data
-coh <- read.csv(system.file("extdata","coh_utm.csv",package = "LinguGeo"))
-# take a look
-head(coh)
-# plot the coherence index and language items
-plot_coh(coh)
-# adjust intensity
-plot_coh(coh,degree=0.2)
-# plot inverse
-plot_coh(coh,inverse=T)
-# plot with KDE
-plot_coh(coh,est_dens=T,coh_th=0.8)
 }
 \author{
 Andreas Schönberg

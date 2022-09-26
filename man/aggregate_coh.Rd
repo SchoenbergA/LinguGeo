@@ -7,7 +7,7 @@
 aggregate_coh(ls)
 }
 \arguments{
-\item{ls_coh}{list - list of coh items}
+\item{ls}{list - list of dataframes computed by 'LinguGeo::coh'}
 }
 \value{
 returns the aggregated coh values devided by n entries which are !=NA for each place.
@@ -17,7 +17,6 @@ aggregates the coh values for each place.
 }
 \examples{
 # load librarys
-require(LinguGeo)
 }
 \author{
 Andreas Schönberg

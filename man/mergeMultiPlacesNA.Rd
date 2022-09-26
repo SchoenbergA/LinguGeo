@@ -4,7 +4,7 @@
 \alias{mergeMultiPlacesNA}
 \title{mergeMultiPlacesNA}
 \usage{
-mergeMultiPlacesNA(df, pos_x, pos_y, col, col_ls)
+mergeMultiPlacesNA(df, pos_x, pos_y, col, col_ls = NULL)
 }
 \arguments{
 \item{df}{data.frame.}
@@ -14,25 +14,24 @@ mergeMultiPlacesNA(df, pos_x, pos_y, col, col_ls)
 \item{pos_y}{numeric - column with y-coordinates}
 
 \item{col}{numeric - column with "class"}
+
+\item{col_ls}{list, numeric - list with numeric column position which should be merged in
+addition to the "class" column. If col_ls==NULL only the class column will be merged. (see details). Default=NULL.}
 }
 \value{
 returns only unique places.
 }
 \description{
-Merges class information for places with multiple entires.
+Merges information for dublicated places with.
 }
 \details{
-uses pasted x and y coordinates to search for multiple entries and
-merges all entires in class for dublicates
+soon
 }
 \note{
 Only useful for classified data!
 }
 \examples{
-# load librarys
-require(LinguGeo)
-require(spatstat)
-require(stringr)
+# soon
 }
 \author{
 Andreas Schönberg

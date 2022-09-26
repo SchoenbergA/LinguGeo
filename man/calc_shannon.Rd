@@ -4,28 +4,21 @@
 \alias{calc_shannon}
 \title{calc_shannon}
 \usage{
-calc_shannon(df, colname_coh = "nrm")
+calc_shannon(df, colname_coh = "coh")
 }
 \arguments{
 \item{df}{data.frame.}
 
-\item{colname_coh}{character - name of column with tzhe coherence values. Default="nrm" (provided by 'LinguGeo::CoherenceIndex'.}
+\item{colname_coh}{character - name of column with the coherence values. Default="nrm" (provided by 'LinguGeo::CoherenceIndex'.}
 }
 \value{
-returns the data.frame and adds a columns with shannon entropy values.
+returns the data.frame and adds a column with shannon entropy values.
 }
 \description{
 Calculates the shannon entropy.
 }
 \examples{
 # load librarys
-require(LinguGeo)
-# load data
-coh <- read.csv(system.file("extdata","coh_utm.csv",package = "LinguGeo"))
-# take a look
-head(coh)
-shannon <- calc_shannon(coh)
-shannon$shn
 }
 \author{
 Andreas Schönberg

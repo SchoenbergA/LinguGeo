@@ -1,3 +1,44 @@
+# LinguGeo 0.0.0.9015
+Clean up and release preparations
+Development version
+Test version
+
+* several tests with different input data format (column order, n columns and CRS), different order of coordinates (xy,yx).
+
+* Delete all old versions of functions
+
+* update 'multiplacesNA'
+  col_ls now does not need to include class col. If NULL no additional columns will be merge. If set     but includes the class column, it will be recycled
+
+  Output colname change from 'n' to 'n_places'
+
+* Update 'phenmn_class2
+  Delete option to trim class 0 due to new NA workflow. Trimming class 0 would result in missing values   for places. The set_NA argmunet will set class 0 to NA to keep all places in the dataframe.
+
+  Delete develop mode to keep unneeded columns
+
+* bugfix for 'coherenceIndex3'
+  Now the check for NA uses the column position which == cl. Older version used hardcoded column 4       which would be correct if 'phenmn_class2' is used with develop=F. But this bug would lead to an error   if develop=T or using another column order.
+
+  Remove unneeded 'index' column.
+  Rbind of "NA Places" now uses variable x,y columns and retunrs NA for each other column. Older versions used hardcoded columns.
+  
+  Add warning if na_value is set to 0.
+  
+  Add error for wrong input 'NA_value'
+  
+  Bugfix if no local variation is detected. Older version did not work due to an issue. To check if LV occures old version asked for "length of vector" but require to ask for "nrow".
+
+* bugfix for 'plot_agt'
+  fixed wrong variable name
+
+* minor fixes
+  calc_channon change variable default
+  add check for length of xy coordinates to 'aggregate_coh' receive warning if unequal
+
+* new function 'plot_agt2'
+Development function to plot NA values. The problem is that the n scale by alpha seems not to work properly if only n=1 occures
+
 # LinguGeo 0.0.0.9014
 Major Update - Add NA handling to several functions
 Development version

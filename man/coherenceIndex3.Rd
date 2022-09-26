@@ -24,6 +24,10 @@ coherenceIndex3(
 \item{ycord}{numeric - column with y-coordinates}
 
 \item{nk}{numeric - amount of nearest neighbors to use. Maximum is 19.}
+
+\item{develop}{boolean - If TRUE will return the full dataframe with all steps. Default=FALSE}
+
+\item{na_value}{NA, NULL, numeric or character - the value which indicates NA in the 'class' column of the dataframe.(see details).}
 }
 \value{
 returns the coherence index for each data point including local variation.
@@ -36,26 +40,6 @@ no notes
 }
 \examples{
 # load librarys
-require(LinguGeo)
-require(spatstat)
-require(stringr)
-
-# load data
-csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
-# take a look
-head(csv)
-
-# reclassify and trim all rows with no class (0)
-csv <- phenmn_class2(data=csv,colname = "hunde",
-                     pat_exp = c("nd|nt","ng|n.g","nn|n$")
-                     ,cl_to = c("nd"   ,"ng"    ,"nn")
-                     ,trim=T)
-
-# calculate Coherence Index for "hunde" with "type"
-coh2 <- coherenceIndex2(csv,csv$class,2,3,nk=5)
-
-# compare to older version without local variation
-coh <- coherenceIndex(csv,csv$class,2,3,nk=5)
 }
 \author{
 Andreas Schönberg

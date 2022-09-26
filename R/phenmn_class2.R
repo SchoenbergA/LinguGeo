@@ -4,7 +4,6 @@
 #' @param colname  charater - name of column containing the strings
 #' @param pat_exp character - expressions which will be used for pattern matching
 #' @param cl_to character - classnames. Must be of same lenght as 'pat_exp'
-#' @param trim boolean - if TRUE will trim rows which have none applied class (0).
 #' @param develop boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.
 #' @param set_NA boolean - if TRUE will convert all class '0' to NA (see notes)
 
@@ -20,36 +19,8 @@
 #' @aliases phenmn_class2
 #' @examples
 #' # load librarys
-#' require(LinguGeo)
-#' require(stringr)
-#'
-#' # load data
-#' csv <- read.csv(system.file("extdata","hunde_utm.csv",package = "LinguGeo"))
-#' # take a look
-#' head(csv)
-#'
-#' # reclassify "hunde" using the old version and trim all rows with no class (0)
-#' new_class <- phenmn_class(data=csv,colname = "hunde",
-#'                           pat_exp = c("nd|nt","ng|n.g","nn|n$")
-#'                           ,cl_to = c("nd"   ,"ng"    ,"nn"))
-#'
-#'
-#' # compare to new version
-#' new_class <- phenmn_class2(data=csv,colname = "hunde",
-#'                            pat_exp = c("nd|nt","ng|n.g","nn|n$")
-#'                            ,cl_to = c("nd"   ,"ng"    ,"nn")
-#'                            ,trim=T)
-#'
-#' # test for n items > 2
-#' # get test data
-#' testdata <- csv[1:5,]
-#' testdata$hunde[1] <- "Hunde, Hunn, Hung"
-#' testdata$hunde[2] <- "Hude, Hunng, Hunnd, Hunde"
-#'
-#' test <- phenmn_class2(data=testdata,colname = "hunde",pat_exp = c("nd|nt","ng|n.g","nn|n$"),
-#'                       cl_to = c("nd"   ,"ng"    ,"nn"))
 
-phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T,set_NA=F){
+phenmn_class2 <- function(data,colname,pat_exp,cl_to,set_NA=F){
 
   # check input
 
@@ -61,6 +32,10 @@ phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T,set_NA=F){
   if(class(data)!="data.frame"){
     stop("Input must be of type 'data.frame'")
   }
+  if(colname%in%colnames(data)==F){
+    stop("Selected colname not in data")
+  }
+
   # save ncol for original data
   ncol_data <- ncol(data)
   # get column for input
@@ -112,20 +87,11 @@ phenmn_class2 <- function(data,colname,pat_exp,cl_to,trim=F,develop=T,set_NA=F){
   if(n_corrupted>0){
     warning(paste0(n_corrupted," data items have exact one item but match multiple expressions"))
   }
-
-  if(develop==F){
-    # delete unneeded columns
+    # delete unneeded columns (outcomment to get full data)
     data <- subset(data,select = -c(pos_min:pos_max))
-  }
 
   # print result
   print(table(data$class))
-  # trim output
-  if(trim ==T){
-    cat(paste0("Trimming ",nrow(data)-nrow(subset(data,data$class!=0)), " entries with class = '0'"),sep="\n")
-    data <- subset(data,data$class!=0)
-    print(table(data$class))
-  }
 
 
   if(set_NA==T){
