@@ -1,10 +1,8 @@
 #' calc_shannon
-#' @description Calculates the shannon entropy.
-#' @param df  data.frame.
-#' @param colname_coh character - name of column with the coherence values. Default="nrm" (provided by 'LinguGeo::CoherenceIndex'.
-
-#' @return returns the data.frame and adds a column with shannon entropy values.
-
+#' @description calculates the local measure of Shannon entropy
+#' @param df  data.frame - with at least the coherence values and x y coordinates
+#' @param colname_coh character - column name with the coherence values. Default="coh" (provided by 'LinguGeo::coherence'
+#' @return returns the data.frame and adds a column with the Shannon entropy values
 #' @author Andreas Schönberg
 #' @export calc_shannon
 #' @aliases calc_shannon

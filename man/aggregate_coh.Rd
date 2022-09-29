@@ -10,10 +10,10 @@ aggregate_coh(ls)
 \item{ls}{list - list of dataframes computed by 'LinguGeo::coh'}
 }
 \value{
-returns the aggregated coh values devided by n entries which are !=NA for each place.
+returns the aggregated coherence values devided by n entries which are !=NA for each place.
 }
 \description{
-aggregates the coh values for each place.
+aggregates the coherence values for each place.
 }
 \examples{
 # load librarys

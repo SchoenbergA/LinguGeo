@@ -1,13 +1,13 @@
 #' convertCRS
-#' @description Convert the CRS for the dataframe.
-#' @param df  data.frame
-#' @param pox_x numeric - column position with X-coordinates
-#' @param pox_y numeric - column position with Y-coordinates
+#' @description convert the CRS for the dataframe
+#' @param df  data.frame - with at least x and y coordinates
+#' @param pos_x numeric - column position with X-coordinates
+#' @param pos_y numeric - column position with Y-coordinates
 #' @param src_proj character - CRS string for the source CRS
 #' @param trg_proj character - CRS string for the traget CRS
 #' @param colnames_trg character - desired column names for the converted coordinates.
 #' IF NULL the default names will be "trg_x", "trg_y". Default=NULL.
-#' @return returns the aggregated coh values devided by n entries which are !=NA for each place.
+#' @return returns the data.frame with additional columns for the desired x y coordinates.
 #' @author Andreas Schönberg
 #' @export convertCRS
 #' @aliases convertCRS
@@ -39,15 +39,15 @@ convertCRS <- function(df,pos_x,pos_y,src_proj,trg_proj,colnames_trg=NULL){
   }
 
   # get spatial object
-  df_spt <- SpatialPointsDataFrame(df[,pos_x:pos_y],df)
+  df_spt <- sp::SpatialPointsDataFrame(df[,pos_x:pos_y],df)
   # set projection
-  proj4string(df_spt) <- src_proj
+  sp::proj4string(df_spt) <- src_proj
 
   # reproject
-  df_trg <- spTransform(df_spt,trg_proj)
+  df_trg <- sp::spTransform(df_spt,trg_proj)
 
   # add geometry to df
-  geo <- geom(df_trg)
+  geo <- raster::geom(df_trg)
 
   # write UTM geometry
   df$trg_x <- geo[,2]

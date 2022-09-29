@@ -1,7 +1,7 @@
 #' aggregate_coh
-#' @description aggregates the coh values for each place.
+#' @description aggregates the coherence values for each site
 #' @param ls  list - list of dataframes computed by 'LinguGeo::coh'
-#' @return returns the aggregated coh values devided by n entries which are !=NA for each place.
+#' @return returns the aggregated coherence values divided by n entries which are !=NA for each site
 #' @author Andreas Schönberg
 #' @export aggregate_coh
 #' @aliases aggregate_coh
@@ -22,7 +22,7 @@ aggregate_coh <- function(ls){
   }
 
   # check for mixed CRS
-  if(var(crs_check)!=0){
+  if(stats::var(crs_check)!=0){
     warning("Length of coordinate strings are not equal ! ")
   }
 
@@ -43,7 +43,7 @@ aggregate_coh <- function(ls){
     df_agt$agt[i] <- sum(df_agt[i,c(3:nc)],na.rm = T)/
       (length(ls)-length(  which(is.na(df_agt[i,c(3:nc)])==T)))
     # add column with n entires !=NA
-    df_agt$n[i] <- length(which(is.na(df_agt[i,c(3:nc)])==F))
+    df_agt$amount[i] <- length(which(is.na(df_agt[i,c(3:nc)])==F))
 
   }
   return(df_agt)

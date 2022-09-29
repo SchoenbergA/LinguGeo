@@ -1,26 +1,26 @@
-#' mergeMultiPlacesNA
-#' @description Merges information for dublicated places with.
-#' @param df  data.frame.
-#' @param pos_x numeric - column with x-coordinates
-#' @param pos_y numeric - column with y-coordinates
-#' @param col numeric - column with "class"
+#' mergeMultiPlaces
+#' @description merges information of places with identical coordinates
+#' @param df  data.frame - with at least x y coordinates and one data column
+#' @param pos_x numeric - column position with x-coordinates
+#' @param pos_y numeric - column position with y-coordinates
+#' @param col numeric - column position with class information
 #' @param col_ls list, numeric - list with numeric column position which should be merged in
-#' addition to the "class" column. If col_ls==NULL only the class column will be merged. (see details). Default=NULL.
-#' @return returns only unique places.
+#' addition to the "class" column. If col_ls==NULL only the class column will be merged. (see details). Default=NULL
+#' @return returns the data.frame with only the unique places.
 #' @note Only useful for classified data!
 #' @details soon
 #' @author Andreas Schönberg
-#' @export mergeMultiPlacesNA
-#' @aliases mergeMultiPlacesNA
+#' @export mergeMultiPlaces
+#' @aliases mergeMultiPlaces
 #' @examples
 #' # soon
 
-mergeMultiPlacesNA <- function(df,pos_x,pos_y,col,col_ls=NULL){
+mergeMultiPlaces <- function(df,pos_x,pos_y,col,col_ls=NULL){
 
   # check col_ls
   if(any(col_ls==col)){
     cat("Class column detect in 'col_ls'. Recycle dublicated class column")
-    col_ls <-col_ls[-which(col_ls==col)]
+    col_ls <- col_ls[-which(col_ls==col)]
   }
   if(is.null(col_ls)==T) {
     col_ls <- col

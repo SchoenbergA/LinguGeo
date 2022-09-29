@@ -1,7 +1,7 @@
 #' plot_agt
-#' @description Specialised ggplot2 based plot function to visualize the aggregated coh values.
-#' @param df_agt  data.frame - with aggregated coh values computed by 'LinguGeo::aggregate_coh'
-#' @return returns a ggplot2 based visualization for the aggregated coh values..
+#' @description ggplot2 based plot function in order to visualize the aggregated coherence values
+#' @param df_agt  data.frame - with aggregated coherence values computed by 'LinguGeo::aggregate_coh'
+#' @return returns a ggplot2 based visualization for the aggregated coherence values
 #' @author Andreas Schönberg
 #' @export plot_agt
 #' @aliases plot_agt
@@ -11,13 +11,13 @@
 
 plot_agt <- function(df_agt){
 
-  plt <- ggplot(df_agt, aes(xcord, ycord,
+  plt <- ggplot2::ggplot(df_agt, aes(xcord, ycord,
                    col = agt,
-                   alpha = n
+                   alpha = amount
 )) +
   geom_point(size = 3) +
   theme(legend.position="left") +
-  scale_color_viridis(discrete = F)+
+  viridis::scale_color_viridis(discrete = F) +
   labs(x="", y="")
 
   return(plt)

@@ -1,9 +1,9 @@
 #' plot_shannon
-#' @description Specialized plot function for the Shannon entropy.
-#' @param df  data.frame - in the format provided by 'LinguGeo::calc_shannon' (see details).
-#' @param add_data Boolean - If FALSE will plot the shannon entropy, if TRUE will plot the Language Item classes and use alpha based on shannon entropy values. Default=F
+#' @description ggplot2 based plot function in order to plot the local measure of Shannon entropy
+#' @param df  data.frame - in the format provided by 'LinguGeo::calc_shannon' (see details)
+#' @param add_data boolean - if FALSE will plot the Shannon entropy, if TRUE will plot the language item classes and use alpha based on Shannon entropy values. Default=FALSE
 
-#' @return A plot with the shannon entropy or the language item classes in different colors and the shannon entropy as alpha.
+#' @return a plot with the Shannon entropy or the language item classes in different colors and the Shannon entropy as alpha
 
 #' @author Andreas Schönberg
 #' @export plot_shannon
@@ -20,7 +20,7 @@ if(any(colnames(df=="shn")==F)){
 
 # fork to display shannon only or data and shannon as alpha
 if(add_data==F){
-  ggplot(df, aes(xcord, ycord,
+  ggplot2::ggplot(df, aes(xcord, ycord,
                   col = shn)) +
     geom_point(size = 3) +
     labs(x="", y="") +
@@ -28,7 +28,7 @@ if(add_data==F){
     theme(legend.position = "none") +
     scale_color_gradient(low = "black", high = "yellow")
 } else {
-  ggplot(df, aes(xcord, ycord,
+  ggplot2::ggplot(df, aes(xcord, ycord,
                   col = data,
                   alpha = shn)) +
     geom_point(size = 3) +

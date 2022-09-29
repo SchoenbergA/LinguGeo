@@ -1,26 +1,24 @@
-#' phenmn_class2
-#' @description Phenomenon Classification. Semi-automatic classification of strings by expressions.
-#' @param data  data.frame or SpatialPointData.frame.
-#' @param colname  charater - name of column containing the strings
+#' phenmn_class
+#' @description semi-automatic classification of language items by regular expression
+#' @param data data.frame - with at least x y coordinates and one data column
+#' @param colname character - name of column containing the data to be classified
 #' @param pat_exp character - expressions which will be used for pattern matching
-#' @param cl_to character - classnames. Must be of same lenght as 'pat_exp'
-#' @param develop boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.
+#' @param cl_to character - desired names for the classes. Must be of same length as 'pat_exp'
 #' @param set_NA boolean - if TRUE will convert all class '0' to NA (see notes)
 
-#' @return returns the dataframe with an additional column containing the classes.
-#' @note The data may match with multiple patterns which could lead to more than 1 class for a single items.
+#' @return Returns the data.frame with an additional column containing the classes.
+#' @note The data may match with multiple patterns which could lead to more than 1 class for a single item.
 #' If single items contain multiple classes the function will provide a warning.
-#' All entries which does not match any of the given pattern will be assigned to class "0". If 'set_NA' == T all class 0 entires will be converted to NA.
-#'
-#' TEXT describing other cases! coming soon
+#' All entries which does not match any of the given pattern will be assigned to class "0". If 'set_NA' == T all class 0 entries will be converted to NA.
+
 
 #' @author Andreas Schönberg
-#' @export phenmn_class2
-#' @aliases phenmn_class2
+#' @export phenmn_class
+#' @aliases phenmn_class
 #' @examples
 #' # load librarys
 
-phenmn_class2 <- function(data,colname,pat_exp,cl_to,set_NA=F){
+phenmn_class <- function(data,colname,pat_exp,cl_to,set_NA=F){
 
   # check input
 

@@ -3,7 +3,7 @@
 \docType{package}
 \name{LinguGeo - package}
 \alias{LinguGeo - package}
-\title{LinguGeo - Package for linguistic Geography}
+\title{LinguGeo - Package for linguistic geography}
 \description{
 The \code{LinguGeo} package is used for methods of linguistic Geography.
 }

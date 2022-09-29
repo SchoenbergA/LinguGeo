@@ -15,13 +15,13 @@ coherenceIndex3(
 )
 }
 \arguments{
-\item{dat}{data.frame.}
+\item{dat}{data.frame - with at least a column for the classification and x y coordinates for the places.}
 
-\item{cl}{charater - name of column containing the classes}
+\item{cl}{character - column name containing the classes}
 
-\item{xcord}{numeric - column with x-coordinates}
+\item{xcord}{numeric - column position with x-coordinates}
 
-\item{ycord}{numeric - column with y-coordinates}
+\item{ycord}{numeric - column position with y-coordinates}
 
 \item{nk}{numeric - amount of nearest neighbors to use. Maximum is 19.}
 
@@ -30,7 +30,7 @@ coherenceIndex3(
 \item{na_value}{NA, NULL, numeric or character - the value which indicates NA in the 'class' column of the dataframe.(see details).}
 }
 \value{
-returns the coherence index for each data point including local variation.
+returns the coherence values for each data point.
 }
 \description{
 Calculates the Coherence Index by using an nearest neighbors approach.

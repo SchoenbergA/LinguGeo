@@ -7,23 +7,21 @@
 phenmn_class2(data, colname, pat_exp, cl_to, set_NA = F)
 }
 \arguments{
-\item{data}{data.frame or SpatialPointData.frame.}
+\item{data}{data.frame - with at least x y coordinates and one data column.}
 
-\item{colname}{charater - name of column containing the strings}
+\item{colname}{character- name of column containing the data which should be classified.}
 
 \item{pat_exp}{character - expressions which will be used for pattern matching}
 
-\item{cl_to}{character - classnames. Must be of same lenght as 'pat_exp'}
+\item{cl_to}{character - desired names for the classes. Must be of same length as 'pat_exp'.}
 
 \item{set_NA}{boolean - if TRUE will convert all class '0' to NA (see notes)}
-
-\item{develop}{boolean - if TRUE will NOT delete columns which are used to identify multiple matches. This is used to check the function.}
 }
 \value{
 returns the dataframe with an additional column containing the classes.
 }
 \description{
-Phenomenon Classification. Semi-automatic classification of strings by expressions.
+Semi-automatic phenomenon classification for language items by expressions.
 }
 \note{
 The data may match with multiple patterns which could lead to more than 1 class for a single items.

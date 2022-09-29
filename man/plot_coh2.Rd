@@ -7,19 +7,19 @@
 plot_coh2(df, est_dens = F, coh_th = NULL, bins = 10)
 }
 \arguments{
-\item{df}{data.frame in the format provided by 'coherence_index' (see deteails).}
+\item{df}{data.frame - in the format provided by 'LinguGeo::coherence_index'.}
 
 \item{est_dens}{boolean - If TRUE performs a KDE and adds the contours to the plot. Default = FALSE}
 
 \item{coh_th}{numeric - Threshold for the coherence index to use for KDE (only used if 'est_dens' = T). Default=NULL}
 
-\item{bins}{numeric - Number of countour bins for KDE (only used if 'est_dens' = T). Default=10}
+\item{bins}{numeric - Number of contour bins for KDE (only used if 'est_dens' = T). Default=10}
 }
 \value{
 A plot with the language item classes in different colors and the coherence index as alpha values.
 }
 \description{
-Specialized plot function for the Coherence index.
+Specialized ggplot2 based plot function to plot the coherence values.
 }
 \examples{
 # load librarys

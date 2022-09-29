@@ -1,20 +1,20 @@
 #' plot_coh
-#' @description Specialized plot function for the Coherence index.
-#' @param df  data.frame in the format provided by 'coherence_index' (see deteails).
-#' @param est_dens boolean - If TRUE performs a KDE and adds the contours to the plot. Default = FALSE
-#' @param coh_th numeric - Threshold for the coherence index to use for KDE (only used if 'est_dens' = T). Default=NULL
-#' @param bins numeric - Number of countour bins for KDE (only used if 'est_dens' = T). Default=10
+#' @description ggplot2 based plot function in order to plot the coherence values
+#' @param df  data.frame - in the format provided by 'LinguGeo::coherence'
+#' @param est_dens boolean - if TRUE performs a KDE and adds the contours to the plot. Default = FALSE
+#' @param coh_th numeric - threshold for the coherence index to use for KDE (only used if 'est_dens' = T). Default=NULL
+#' @param bins numeric - number of bins for KDE (only used if 'est_dens' = T). Default=10
 
 #' @return A plot with the language item classes in different colors and the coherence index as alpha values.
 
 #' @author Andreas Schönberg
-#' @export plot_coh2
-#' @aliases plot_coh2
+#' @export plot_coh
+#' @aliases plot_coh
 #' @examples
 #' # load librarys
 
 
-plot_coh2 <- function(df,est_dens=F,coh_th=NULL,bins=10) {
+plot_coh <- function(df,est_dens=F,coh_th=NULL,bins=10) {
 
   # check for NA
   if(any(is.na(df$coh))){
@@ -23,14 +23,15 @@ plot_coh2 <- function(df,est_dens=F,coh_th=NULL,bins=10) {
     s2 <- subset(df,is.na(df$coh)  )# all NA
 
     # plot
-    plt <- ggplot(s1, aes(xcord, ycord,
+    plt <- ggplot2::ggplot(s1, aes(xcord, ycord,
                    col = data,
                    alpha = 1-coh)) +
       geom_point(size = 3) +
       theme(legend.position="left") +
-      scale_color_viridis(discrete = T)+
-      labs(x="", y="") +
+      viridis::scale_color_viridis(discrete = T)+
+      labs(x="", y="", caption = ". NA") +
       geom_point(data=s2, size=0.5,color="black",alpha=0.90)
+
 
     # optional KDE density display
     if(est_dens==T){
@@ -43,7 +44,7 @@ plot_coh2 <- function(df,est_dens=F,coh_th=NULL,bins=10) {
       }
 
       # plot coh + KDE density
-      return(plt + geom_density_2d(data = dplyr::filter(df, coh < coh_th),
+      return(plt + ggplot2::geom_density_2d(data = dplyr::filter(df, coh < coh_th),
                                    #h = 0.08,
                                    alpha = 1,
                                    bins = bins,
@@ -53,13 +54,13 @@ plot_coh2 <- function(df,est_dens=F,coh_th=NULL,bins=10) {
 
   } else {
     # plot
-    plt <- ggplot(df, aes(xcord, ycord,
+    plt <- ggplot2::ggplot(df, aes(xcord, ycord,
                           col = data,
                           alpha = 1-coh)) +
       geom_point(size = 3) +
       labs(x="", y="") +
       theme(legend.position="left") +
-      scale_color_viridis(discrete = T)
+      viridis::scale_color_viridis(discrete = T)
     # optional KDE density display
     if(est_dens==T){
 
@@ -71,7 +72,7 @@ plot_coh2 <- function(df,est_dens=F,coh_th=NULL,bins=10) {
       }
 
       # plot coh + KDE density
-      return(plt + geom_density_2d(data = dplyr::filter(df, coh < coh_th),
+      return(plt + ggplot2::geom_density_2d(data = dplyr::filter(df, coh < coh_th),
                                    #h = 0.08,
                                    alpha = 1,
                                    bins = bins,

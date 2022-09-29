@@ -1,3 +1,13 @@
+# LinguGeo 0.0.0.9016
+Clean up and release preparations
+Development version
+
+* clean correct and update descriptions
+* add an check dependecies. add :: and imports
+* add new function "convertCRS"
+* spelling corrections with Alfred Lameli
+* rename some functins BUT not rename .R files
+
 # LinguGeo 0.0.0.9015
 Clean up and release preparations
 Development version

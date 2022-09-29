@@ -7,22 +7,22 @@
 mergeMultiPlacesNA(df, pos_x, pos_y, col, col_ls = NULL)
 }
 \arguments{
-\item{df}{data.frame.}
+\item{df}{data.frame - with at least x y coordinates and one data column.}
 
-\item{pos_x}{numeric - column with x-coordinates}
+\item{pos_x}{numeric - column position with x-coordinates}
 
-\item{pos_y}{numeric - column with y-coordinates}
+\item{pos_y}{numeric - column position with y-coordinates}
 
-\item{col}{numeric - column with "class"}
+\item{col}{numeric - column position with the class information.}
 
 \item{col_ls}{list, numeric - list with numeric column position which should be merged in
 addition to the "class" column. If col_ls==NULL only the class column will be merged. (see details). Default=NULL.}
 }
 \value{
-returns only unique places.
+returns the data.frame with only the unique places.
 }
 \description{
-Merges information for dublicated places with.
+Merges information for places with identical coordinates.
 }
 \details{
 soon

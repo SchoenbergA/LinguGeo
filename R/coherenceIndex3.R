@@ -1,22 +1,22 @@
-#' coherenceIndex3
-#' @description Calculates the Coherence Index by using an nearest neighbors approach.
-#' @param dat  data.frame.
-#' @param cl  charater - name of column containing the classes
-#' @param xcord numeric - column with x-coordinates
-#' @param ycord numeric - column with y-coordinates
-#' @param nk numeric - amount of nearest neighbors to use. Maximum is 19.
-#' @param develop boolean - If TRUE will return the full dataframe with all steps. Default=FALSE
-#' @param na_value NA, NULL, numeric or character - the value which indicates NA in the 'class' column of the dataframe.(see details).
-#' @return returns the coherence index for each data point including local variation.
+#' coherence
+#' @description calculates the coherence by using a nearest neighbor approach
+#' @param dat  data.frame - with at least one column for classification and x y coordinates for the places
+#' @param cl  character - column name containing classes
+#' @param xcord numeric - column position with x-coordinates
+#' @param ycord numeric - column position with y-coordinates
+#' @param nk numeric - amount of nearest neighbors to use. Maximum is 19
+#' @param develop boolean - If TRUE will return the full data.frame with all steps. Default=FALSE
+#' @param na_value NA, NULL, numeric or character - the value which indicates NA in the 'class' column of the data.frame (see details)
+#' @return returns the coherence values for each data point
 #' @note no notes
 #' @author Andreas Schönberg
-#' @export coherenceIndex3
-#' @aliases coherenceIndex3
+#' @export coherence
+#' @aliases coherence
 #' @examples
 #' # load librarys
 
 
-coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=NA) {
+coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=NA) {
 
   # check for correct coordinates
   if(xcord>ycord){
@@ -78,7 +78,7 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
   # get neighbors
   neigh <- spatstat.geom::nnwhich(vec_ppp, k = 1:nk)
   neigh <-as.data.frame(neigh)
-  head(neigh)
+
 
   # cbind NN class to dataframe (i controls for nk selected)
   for (i in 1:nk) {
@@ -101,10 +101,6 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
       neigh_df2 <-cbind(neigh_df2,cl[neigh[[i]]])
       # set name
       names(neigh_df2)[names(neigh_df2) == 'cl[neigh[[i]]]'] <- paste0("NN",i)
-
-      # loop control
-      #print(i)
-      head(neigh_df2)
     }
 
 
@@ -240,7 +236,6 @@ coherenceIndex3 <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_v
     uvar <- length(uvar)
   }
 
-  cat(paste0("Global coh uncorrected: ",round(glob,4)," @ ",uvar," variants"),sep = "\n")
   cat(paste0("Global coh: ",round(glob_corr,4)," @ ",uvar," variants"),sep = "\n")
 
   if(develop==F){

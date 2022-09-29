@@ -7,13 +7,13 @@
 plot_agt(df_agt)
 }
 \arguments{
-\item{df_agt}{data.frame - with aggregated coh values computed by 'LinguGeo::aggregate_coh'}
+\item{df_agt}{data.frame - with aggregated coherence values computed by 'LinguGeo::aggregate_coh'}
 }
 \value{
-returns a ggplot2 based visualization for the aggregated coh values..
+returns a ggplot2 based visualization for the aggregated coherence values.
 }
 \description{
-Specialised ggplot2 based plot function to visualize the aggregated coh values.
+Specialized ggplot2 based plot function to visualize the aggregated coherence values.
 }
 \examples{
 # load librarys
