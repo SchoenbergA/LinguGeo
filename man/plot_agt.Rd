@@ -10,10 +10,10 @@ plot_agt(df_agt)
 \item{df_agt}{data.frame - with aggregated coherence values computed by 'LinguGeo::aggregate_coh'}
 }
 \value{
-returns a ggplot2 based visualization for the aggregated coherence values.
+returns a ggplot2 based visualization for the aggregated coherence values
 }
 \description{
-Specialized ggplot2 based plot function to visualize the aggregated coherence values.
+ggplot2 based plot function in order to visualize the aggregated coherence values
 }
 \examples{
 # load librarys

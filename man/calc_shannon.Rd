@@ -7,15 +7,15 @@
 calc_shannon(df, colname_coh = "coh")
 }
 \arguments{
-\item{df}{data.frame - with at least the coherence values and x y coordinates.}
+\item{df}{data.frame - with at least the coherence values and x y coordinates}
 
-\item{colname_coh}{character - column name with the coherence values. Default="coh" (provided by 'LinguGeo::CoherenceIndex'.}
+\item{colname_coh}{character - column name with the coherence values. Default="coh" (provided by 'LinguGeo::coherence'}
 }
 \value{
-returns the data.frame and adds a column with the shannon entropy values.
+returns the data.frame and adds a column with the Shannon entropy values
 }
 \description{
-Calculates the shannon entropy.
+calculates the local measure of Shannon entropy
 }
 \examples{
 # load librarys

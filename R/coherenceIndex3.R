@@ -18,6 +18,13 @@
 
 coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=NA) {
 
+  # check for non numeric coordinates
+  if(class(dat[,xcord])!="numeric"){
+    stop("non numeric x coordinates detected! Numeric values are required")
+  }
+  if(class(dat[,ycord])!="numeric"){
+    stop("non numeric y coordinates detected! Numeric values are required")
+  }
   # check for correct coordinates
   if(xcord>ycord){
     stop("Coordinates are in y x order! x y order is required")

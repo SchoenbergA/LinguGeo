@@ -21,10 +21,10 @@ convertCRS(df, pos_x, pos_y, src_proj, trg_proj, colnames_trg = NULL)
 IF NULL the default names will be "trg_x", "trg_y". Default=NULL.}
 }
 \value{
-returns the aggregated coh values devided by n entries which are !=NA for each place.
+returns the data.frame with additional columns for the desired x y coordinates.
 }
 \description{
-Convert the CRS for the dataframe.
+convert the CRS for the dataframe
 }
 \examples{
 # load librarys

@@ -1,3 +1,10 @@
+# LinguGeo 0.0.0.9017
+Development version
+
+* Bugfixes
+  convertCRS - as.numeric for y coordinates now uses y position instead of x position
+  coherence - add check for non numeric xy coordinates
+
 # LinguGeo 0.0.0.9016
 Clean up and release preparations
 Development version

@@ -32,7 +32,7 @@ convertCRS <- function(df,pos_x,pos_y,src_proj,trg_proj,colnames_trg=NULL){
     cat("X coordinates are numeric",sep="\n")
   }
   if(class(df[,pos_y])!="numeric"){
-    df[,pos_x] <- as.numeric(df[,pos_x])
+    df[,pos_y] <- as.numeric(df[,pos_y])
     cat("Converting Y coordinates to numeric",sep="\n")
   } else {
     cat("Y coordinates are numeric",sep="\n")

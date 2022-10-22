@@ -7,15 +7,15 @@
 plot_shannon(df, add_data = F)
 }
 \arguments{
-\item{df}{data.frame - in the format provided by 'LinguGeo::calc_shannon' (see details).}
+\item{df}{data.frame - in the format provided by 'LinguGeo::calc_shannon' (see details)}
 
-\item{add_data}{boolean - If FALSE will plot the shannon entropy, if TRUE will plot the Language Item classes and use alpha based on shannon entropy values. Default=FALSE}
+\item{add_data}{boolean - if FALSE will plot the Shannon entropy, if TRUE will plot the language item classes and use alpha based on Shannon entropy values. Default=FALSE}
 }
 \value{
-A plot with the shannon entropy or the language item classes in different colors and the shannon entropy as alpha.
+a plot with the Shannon entropy or the language item classes in different colors and the Shannon entropy as alpha
 }
 \description{
-Specialized ggplot2 based plot function for the Shannon entropy.
+ggplot2 based plot function in order to plot the local measure of Shannon entropy
 }
 \examples{
 # load librarys
