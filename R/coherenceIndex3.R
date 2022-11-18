@@ -13,10 +13,21 @@
 #' @export coherence
 #' @aliases coherence
 #' @examples
-#' # load librarys
+#' # load data
+#' hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+#'
+#' head(hunde_utm)
+#'
+#' # calculate coherence
+#' coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+#' head(coh)
+#'
+#' # # calculate coherence and set class "0" to NA
+#' coh_NA <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = 0,develop = F)
+#' head(coh_NA)
 
 
-coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=NA) {
+coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=NA) {
 
   # check for non numeric coordinates
   if(class(dat[,xcord])!="numeric"){
@@ -157,7 +168,7 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=T,na_value=N
 
   # NN check loop for df_i2 (2 item in data)
   if(nrow(df_i2)!=0){
-    cat("Local variation detectet!",sep="\n")
+    cat("Local variation detected!",sep="\n")
     for(nn in 1:nk){
 
     # open new vector

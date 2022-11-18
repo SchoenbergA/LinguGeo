@@ -22,7 +22,25 @@ A plot with the language item classes in different colors and the coherence inde
 ggplot2 based plot function in order to plot the coherence values
 }
 \examples{
-# load librarys
+# load data
+hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+
+head(hunde_utm)
+
+# calculate coherence
+coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+
+# calculate coherence and set class "0" to NA
+coh_NA <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = 0,develop = F)
+
+# plot coherence
+plot_coh(coh)
+
+# plot coherence with KDE
+plot_coh(coh,est_dens = T,coh_th = 0.9,bins = 5)
+
+# plot coherence with NA
+plot_coh(coh_NA)
 }
 \author{
 Andreas Schönberg

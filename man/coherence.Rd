@@ -10,7 +10,7 @@ coherence(
   xcord = NULL,
   ycord = NULL,
   nk = NULL,
-  develop = T,
+  develop = F,
   na_value = NA
 )
 }
@@ -39,7 +39,18 @@ calculates the coherence by using a nearest neighbor approach
 no notes
 }
 \examples{
-# load librarys
+# load data
+hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+
+head(hunde_utm)
+
+# calculate coherence
+coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+head(coh)
+
+# # calculate coherence and set class "0" to NA
+coh_NA <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = 0,develop = F)
+head(coh_NA)
 }
 \author{
 Andreas Schönberg

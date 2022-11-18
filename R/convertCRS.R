@@ -12,7 +12,35 @@
 #' @export convertCRS
 #' @aliases convertCRS
 #' @examples
-#' # load librarys
+#' # load data
+#' maurer_wgs <- openxlsx::read.xlsx(xlsxFile =system.file("extdata","Subset_Maurer_wgs.xlsx",package = "LinguGeo"))
+#'
+#' # check column positions and structure
+#' head(maurer_wgs) # Coordinates are in Long/Lat Format
+#' str(maurer_wgs) # Coordinates are "character"
+#'
+#' # define source and target projection
+#' src <- "+proj=longlat +datum=WGS84 +no_defs" # WGS 84 (Long / Lat)
+#' trg <- "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs" # UTM 32
+#'
+#' # add utm coordinates to dataframe
+#' maurer_utm <- convertCRS(df = maurer_wgs,
+#'                          pos_x = 3,
+#'                          pos_y = 4,
+#'                          src_proj = src,
+#'                          trg_proj = trg)
+#'
+#' head(maurer_utm)
+#'
+#' # define new colnames
+#' maurer_utm2 <- convertCRS(df = maurer_wgs,
+#'                           pos_x = 3,
+#'                           pos_y = 4,
+#'                           src_proj = src,
+#'                           trg_proj = trg,
+#'                           colnames_trg = c("utm_x","utm_y") )
+#'
+#' head(maurer_utm2)
 
 
 convertCRS <- function(df,pos_x,pos_y,src_proj,trg_proj,colnames_trg=NULL){

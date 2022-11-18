@@ -4,7 +4,7 @@
 \alias{phenmn_class}
 \title{phenmn_class}
 \usage{
-phenmn_class(data, colname, pat_exp, cl_to, set_NA = F)
+phenmn_class(data, colname, pat_exp, cl_to, set_NA = F, cl_colname = NULL)
 }
 \arguments{
 \item{data}{data.frame - with at least x y coordinates and one data column}
@@ -16,6 +16,8 @@ phenmn_class(data, colname, pat_exp, cl_to, set_NA = F)
 \item{cl_to}{character - desired names for the classes. Must be of same length as 'pat_exp'}
 
 \item{set_NA}{boolean - if TRUE will convert all class '0' to NA (see notes)}
+
+\item{cl_colname}{character - optional column name for the classified data. Highly recommended for further classification with the output dataframe. Default=NULL.}
 }
 \value{
 Returns the data.frame with an additional column containing the classes.
@@ -29,7 +31,46 @@ If single items contain multiple classes the function will provide a warning.
 All entries which does not match any of the given pattern will be assigned to class "0". If 'set_NA' == T all class 0 entries will be converted to NA.
 }
 \examples{
-# load librarys
+# load data
+maurer_wgs <- openxlsx::read.xlsx(xlsxFile =system.file("extdata","Subset_Maurer_wgs.xlsx",package = "LinguGeo"))
+
+# set pattern and class
+pat <- c("nd|nt","ng|n.g","nn|n$")
+cl  <- c("nd"   ,"ng"    ,"nn")
+
+# classify
+classified <- phenmn_class(data = maurer_wgs,colname = "l).Hunde",
+                           pat_exp = pat,
+                           cl_to = cl)
+head(classified)
+
+# set colname for the class column
+classified <- phenmn_class(data = maurer_wgs,colname = "l).Hunde",
+                           pat_exp = pat,
+                           cl_to = cl,
+                           cl_colname = "class_Hunde")
+head(classified)
+
+# set all not matching items to NA
+classified_NA <- phenmn_class(data = maurer_wgs,colname = "l).Hunde",
+                              pat_exp = pat,
+                              cl_to = cl,
+                              set_NA = TRUE)
+
+classified_NA[c(2414:2418),]
+
+# classify multiple language items
+cl_hunde <- phenmn_class(data = maurer_wgs,colname = "l).Hunde",
+                         pat_exp = c("nd|nt","ng|n.g","nn|n$"),
+                         cl_to   = c("nd"   ,"ng"    ,"nn"),
+                         cl_colname = "class_Hunde")
+
+cl_butter<- phenmn_class(data = cl_hunde,colname = "96..Butter",
+                         pat_exp = c("tt","dd"),
+                         cl_to   = c("tt","dd" ),
+                         cl_colname = "class_Butter")
+
+head(cl_butter)
 }
 \author{
 Andreas Schönberg

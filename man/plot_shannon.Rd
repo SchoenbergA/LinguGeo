@@ -18,7 +18,22 @@ a plot with the Shannon entropy or the language item classes in different colors
 ggplot2 based plot function in order to plot the local measure of Shannon entropy
 }
 \examples{
-# load librarys
+# load data
+hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+
+head(hunde_utm)
+
+# calculate coherence
+coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+
+# calculate shannon
+shn <- calc_shannon(coh)
+
+# plot shannon
+plot_shannon(shn)
+
+# plot shannon and add data
+plot_shannon(shn,add_data = T)
 }
 \author{
 Andreas Schönberg

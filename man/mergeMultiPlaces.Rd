@@ -4,7 +4,7 @@
 \alias{mergeMultiPlaces}
 \title{mergeMultiPlaces}
 \usage{
-mergeMultiPlaces(df, pos_x, pos_y, col, col_ls = NULL)
+mergeMultiPlaces(df, pos_x, pos_y, col_ls = NULL, class_col_ls = NULL)
 }
 \arguments{
 \item{df}{data.frame - with at least x y coordinates and one data column}
@@ -13,13 +13,12 @@ mergeMultiPlaces(df, pos_x, pos_y, col, col_ls = NULL)
 
 \item{pos_y}{numeric - column position with y-coordinates}
 
-\item{col}{numeric - column position with class information}
+\item{col_ls}{list, numeric - list with numeric column position which should be merged. Default=NULL}
 
-\item{col_ls}{list, numeric - list with numeric column position which should be merged in
-addition to the "class" column. If col_ls==NULL only the class column will be merged. (see details). Default=NULL}
+\item{class_col_ls}{list, numeric - list with numeric column position where duplicates should be cleaned after merging. Typically columns with language items classification. Default=NULL}
 }
 \value{
-returns the data.frame with only the unique places.
+returns the data.frame with only the unique places and optional clean duplicated entires after merge.
 }
 \description{
 merges information of places with identical coordinates
@@ -31,7 +30,22 @@ soon
 Only useful for classified data!
 }
 \examples{
-# soon
+# load data
+mau_class <- read.csv(system.file("extdata","Classification_Maurer.csv",package = "LinguGeo"),row.names = 1)
+head(mau_class)
+
+# merge multiple places
+merged_plc <- mergeMultiPlaces(df = mau_class,pos_x = 1,pos_y = 2,
+                                col_ls = 3:ncol(mau_class))
+
+View(merged_plc)
+
+# merge multiple places and clean duplicates
+merged_plc <- mergeMultiPlaces(df = mau_class,pos_x = 1,pos_y = 2,
+                                col_ls = 3:ncol(mau_class),
+                                class_col_ls = 3:ncol(mau_class))
+
+merged_plc[which(merged_plc$n_places>9),]
 }
 \author{
 Andreas Schönberg

@@ -1,3 +1,17 @@
+# LinguGeo 0.0.0.9018
+Development version
+
+* add example data and examples
+
+* bugfixes and improvements
+phenmn_class - add argumnet to change the colname for the new classification. 
+    If the function is used with a dataframe computed by the function and the class colname has not been change now if will      be automatically renamed to 'class0' to avoid an issue which would overwrite the class column and not classifiy properly.
+    Now the function can be used to continually classify items and reuse the output dataframe.
+    
+mergeMultiPlaces - now the columns which sould be merged can be selected as well as the columns which should be clean of         dublicates. This allows now to merge a dataframe with multiple classifications.
+    
+plot_agt2 - now uses the correct variable name to check for NA values.    
+    
 # LinguGeo 0.0.0.9017
 Development version
 

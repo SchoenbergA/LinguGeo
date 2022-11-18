@@ -18,7 +18,16 @@ returns the data.frame and adds a column with the Shannon entropy values
 calculates the local measure of Shannon entropy
 }
 \examples{
-# load librarys
+# load data
+hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+
+head(hunde_utm)
+
+# calculate coherence
+coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+
+# calculate shannon
+shn <- calc_shannon(coh)
 }
 \author{
 Andreas Schönberg

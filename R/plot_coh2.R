@@ -11,7 +11,25 @@
 #' @export plot_coh
 #' @aliases plot_coh
 #' @examples
-#' # load librarys
+#' # load data
+#' hunde_utm <- read.csv(system.file("extdata","Hunde_classified_utm.csv",package = "LinguGeo"),row.names = 1)
+#'
+#' head(hunde_utm)
+#'
+#' # calculate coherence
+#' coh <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = NULL,develop = F)
+#'
+#' # calculate coherence and set class "0" to NA
+#' coh_NA <- coherence(dat = hunde_utm,cl = "new",xcord = 1,ycord = 2,nk = 5,na_value = 0,develop = F)
+#'
+#' # plot coherence
+#' plot_coh(coh)
+#'
+#' # plot coherence with KDE
+#' plot_coh(coh,est_dens = T,coh_th = 0.9,bins = 5)
+#'
+#' # plot coherence with NA
+#' plot_coh(coh_NA)
 
 
 plot_coh <- function(df,est_dens=F,coh_th=NULL,bins=10) {
