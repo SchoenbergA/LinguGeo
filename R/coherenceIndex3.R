@@ -130,6 +130,8 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=N
   df_i1 <-neigh_df2[which(str_count(neigh_df2$data,",")==0),]
   df_i2 <-neigh_df2[which(str_count(neigh_df2$data,",")>0),]
 
+  #
+  if(nrow(df_i1)>0){
   # NN check loop for df_i1 (1 item in data)
   for(nn in 1:nk){
 
@@ -165,9 +167,11 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=N
     }
 
   } # end loop over nk for 1 item
-
+  } else {
+  df_i1_2 <- df_i1
+}
   # NN check loop for df_i2 (2 item in data)
-  if(nrow(df_i2)!=0){
+  if(nrow(df_i2)>0){
     cat("Local variation detected!",sep="\n")
     for(nn in 1:nk){
 
@@ -180,16 +184,12 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=N
       items_NN <- unlist(str_split(df_i2[r,colnames(df_i1)==paste0("NN",nn)],","))
       items_DT <- unlist(str_split(df_i2$data[r],","))
 
-      # condition NN == data (all items in NN are in Data)
-      if(all(items_NN%in%items_DT & length(items_NN)==length(items_DT))==TRUE){
-        newcol[r] <- 1
-
-        # condition any items in NN is == data and amount of items in NN > 1
-      } else if(any(items_NN%in%items_DT)){
-        newcol[r] <- length(items_NN)/length(items_DT)
-        # condition NN is != data
-      } else {
-        newcol[r] <- 0
+      # calculate simirarity of nn and dat
+      if(length(items_DT)>=length(items_NN)){
+        newcol[r] <- length(which(items_DT%in%items_NN))/length(items_DT)
+      }
+      if (length(items_DT)<length(items_NN)){
+        newcol[r] <-length(which(items_DT%in%items_NN))/length(items_NN)
       }
 
     } # end iteration r
@@ -207,14 +207,14 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=N
 
   } # end loop over nk for 2 item
 
-    # rbind both dataframes
-    neigh_df3 <- rbind(df_i1_2,df_i2_2)
+
        # end if local variation detected in data
        } else {
-         cat("No local variation detectet!",sep="\n")
-         neigh_df3 <- df_i1_2
+         cat("No local variation detected!",sep="\n")
+         df_i2_2 <- df_i2
        }
-
+  # rbind both dataframes
+  neigh_df3 <- rbind(df_i1_2,df_i2_2)
 
 
   # inverse cbind sum of NN values
@@ -245,8 +245,12 @@ coherence <- function(dat, cl,xcord=NULL,ycord=NULL,nk=NULL,develop=F,na_value=N
     (nk*nrow(neigh_df4))
 
   # corrected global coherence index - glob in realtion to n class in type
-  glob_corr <- (glob - 1/length(table(cl))) / (1 - 1/length(table(cl)))
-
+  # if glob =1 formula generates an NaN
+  if(glob!=1){
+    glob_corr <- (glob - 1/length(table(cl))) / (1 - 1/length(table(cl)))
+  }else{
+  glob_corr <-glob
+}
   uvar <-unique(unlist(str_split(cl,",")))
   if(any(uvar==0)){
     uvar <- length(uvar[which(uvar!=0)])
