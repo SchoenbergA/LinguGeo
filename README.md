@@ -1,4 +1,4 @@
 ### LinguGeo
 
 # install LinguGeo
-devtools_install_github("SchoenbergA/LinguGeo")
+devtools::install_github("SchoenbergA/LinguGeo")
